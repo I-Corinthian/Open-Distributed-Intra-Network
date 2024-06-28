@@ -1,24 +1,19 @@
 import socket
+import com_utils as cu
 
-HEADER = 64
-PORT = 3121
-SERVER = socket.gethostname()
-FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "DISCONNECT!"
-ADDR = (SERVER,PORT)
 client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 def send(msg):
-    message = msg.encode(FORMAT)
+    message = msg.encode(cu.FORMAT)
     msg_length = len(message)
-    send_length = str(msg_length).encode(FORMAT)
-    send_length += b' ' * (HEADER - len(send_length))
+    send_length = str(msg_length).encode(cu.FORMAT)
+    send_length += b' ' * (cu.HEADER - len(send_length))
     client.send(send_length)
     client.send(message)
 
-def disconnect():
-    send(DISCONNECT_MESSAGE)
+def disconnected():
+    send(cu.DISCONNECT_MESSAGE)
 
-client.connect(ADDR)
-send("hello world")
-disconnect()
+client.connect(cu.ADDR)
+cu.send(client,"hello world")
+disconnected()
