@@ -6,5 +6,5 @@ def publish(topic_name,data):
     else:
         mf.add_topic(topic_name,data)
 
-def subscrib(topic_name):
+def subscribe(topic_name):
     return mf.read_topic(topic_name)
