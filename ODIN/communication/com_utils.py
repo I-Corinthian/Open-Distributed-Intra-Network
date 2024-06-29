@@ -1,6 +1,6 @@
 import socket
 import pickle
-HEADER = 64
+HEADER = 1024
 PORT = 3121
 SERVER = socket.gethostname()
 FORMAT = 'utf-8'

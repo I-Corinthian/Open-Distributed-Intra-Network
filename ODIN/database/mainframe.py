@@ -24,7 +24,6 @@ def update_topic(topic_name,data):
     try:
         topic.update({topic_name:data})
         __update_memory()
-        print("topic updated")
     except KeyError:
         print("topic not found")
 

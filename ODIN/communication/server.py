@@ -36,4 +36,5 @@ def start():
             thread.start()
             print(f"[ACTIVE CONNECTION]{threading.active_count() - 1}") 
     except KeyboardInterrupt:
+        mfc.clean_mainframe()
         server.close()
