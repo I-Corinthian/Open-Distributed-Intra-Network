@@ -11,22 +11,31 @@ DISCONNECT_MESSAGE = "DISCONNECT!"
 def receive_data(soc):
     msg_length = soc.recv(HEADER).decode(FORMAT)
     receiving = True
-    while receiving:
-        if msg_length:
-            msg_length = int(msg_length)
-            full_msg = b""
-            while len(full_msg) < msg_length:
-                part = soc.recv(msg_length - len(full_msg))
-                full_msg += part
-            return pickle.loads(full_msg)
+    try:
+        while receiving:
+            if msg_length:
+                msg_length = int(msg_length)
+                full_msg = b""
+                while len(full_msg) < msg_length:
+                    part = soc.recv(msg_length - len(full_msg))
+                    full_msg += part
+                return pickle.loads(full_msg)
+    except (BrokenPipeError,ConnectionResetError) as e:
+        if soc:
+            soc.close() 
+    return None
 
 def send_data(soc,msg):
-    message = pickle.dumps(msg)
-    msg_length = len(message)
-    send_length = str(msg_length).encode(FORMAT)
-    send_length += b' ' * (HEADER - len(send_length))
-    soc.send(send_length)
-    soc.send(message)
+    try:
+        message = pickle.dumps(msg)
+        msg_length = len(message)
+        send_length = str(msg_length).encode(FORMAT)
+        send_length += b' ' * (HEADER - len(send_length))
+        soc.send(send_length)
+        soc.send(message)
+    except (BrokenPipeError,ConnectionResetError) as e:
+        if soc:
+            soc.close() 
 
 def publish(soc,topic_name,data):
     send_data(soc,("publisher",topic_name,data))

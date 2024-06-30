@@ -9,5 +9,8 @@ def publish(topic_name,data):
 def subscribe(topic_name):
     return mf.read_topic(topic_name)
 
+def get_avilable_topics():
+    return list(mf.topic.keys())
+
 def clean_mainframe():
     return mf.clean_memory()

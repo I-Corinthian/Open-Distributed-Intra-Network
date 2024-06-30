@@ -9,6 +9,7 @@ time_pub = cu.init_clinet_soc()
 
 try:
     i = 0
+    print("[TIMER STARTED]")
     while True:
         cu.publish(time_pub,"time",i)
         i += 1

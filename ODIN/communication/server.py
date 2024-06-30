@@ -22,6 +22,9 @@ def mainframe_calls(soc,addr):
             elif msg[0] == "subscriber":
                 respose = mfc.subscribe(msg[1])
                 cu.send_data(soc,respose)
+            elif msg == "get_avilable_topics":
+                respose = mfc.get_avilable_topics()
+                cu.send_data(soc,respose)
             else:
                 print(f"[{addr}] {msg}")
     soc.close()
