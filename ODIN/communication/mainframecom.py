@@ -14,3 +14,6 @@ def get_avilable_topics():
 
 def clean_mainframe():
     return mf.clean_memory()
+
+def init_mainframe():
+    return mf.init_memory()

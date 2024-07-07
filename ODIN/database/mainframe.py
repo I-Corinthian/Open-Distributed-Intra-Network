@@ -48,3 +48,8 @@ def __read_memory(topic_name):
 def clean_memory():
     os.remove(temp_memory)
 
+def init_memory():
+    with open(temp_memory,"w") as file:
+        json.dump({},file)
+
+
