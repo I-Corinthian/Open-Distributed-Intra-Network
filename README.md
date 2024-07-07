@@ -37,3 +37,6 @@ To showcase the capabilities of Project ODIN, an AI calculator application has b
 - **Flexibility**: ODIN’s open design allows for extensive customization and adaptability to various fields.
 - **Scalability**: The distributed nature of the framework supports scaling up or down based on requirements.
 - **Real-Time Processing**: Ideal for applications needing real-time data exchange and processing.
+
+**preview**
+![ai calculator](ODIN/img/image.png)

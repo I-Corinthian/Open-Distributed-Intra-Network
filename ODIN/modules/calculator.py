@@ -6,7 +6,7 @@ from communication import com_utils as cu
 cal = cu.init_clinet_soc()
 
 def print_overwrite(message):
-    sys.stdout.write('\r' + ' ' * 80)
+    sys.stdout.write('\033[2K\033[1G')
     sys.stdout.write('\r' + message)
     sys.stdout.flush()
 
@@ -17,17 +17,21 @@ def calculate(num1,num2,operation):
     result = None
     if operation == "+":
         result = num1 + num2
+        print_overwrite(f"[ANSWER]: {result}")
     elif operation == "-":
         result = num1 - num2
+        print_overwrite(f"[ANSWER]: {result}")
     elif operation == "*":
         result = num1 * num2
+        print_overwrite(f"[ANSWER]: {result}")
     elif operation == "/":
         if num2 != 0:
             result = num1 / num2
+            print_overwrite(f"[ANSWER]: {result}")
         else:
             result = "undefined (division by zero)"
 
-    print_overwrite(f"[ANSWER]: {result}")
+    
 
 while True:
     try:
