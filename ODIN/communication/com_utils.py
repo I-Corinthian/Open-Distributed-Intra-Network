@@ -46,6 +46,9 @@ def subscribe(soc,topic_name):
 def disconnect(soc):
     send_data(soc,DISCONNECT_MESSAGE)
 
+def topics_available(soc):
+    return send_data(soc,("get_avilable_topics"))
+
 def init_clinet_soc():
     client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     client.connect(ADDR)

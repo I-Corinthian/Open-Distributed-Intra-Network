@@ -1,6 +1,5 @@
 import socket
 import threading
-import pickle
 from communication import com_utils as cu
 from communication import mainframecom as mfc
 
@@ -16,7 +15,6 @@ def mainframe_calls(soc,addr):
             if msg == cu.DISCONNECT_MESSAGE:
                 connected = False
                 break
-            #todo find if its a publisher or subscribler and call the mainframe  
             if msg[0] == "publisher":
                 mfc.publish(msg[1],msg[2])
             elif msg[0] == "subscriber":
@@ -32,6 +30,7 @@ def mainframe_calls(soc,addr):
 def start():
     print("[STARTING] MainFrame is starting...")
     server.listen()
+    mfc.init_mainframe()
     try:
         while True:
             soc, addr = server.accept()
